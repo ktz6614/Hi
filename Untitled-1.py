@@ -103,12 +103,19 @@ for i in range(r):
         startingnumber=startingnumber+1
         if startingnumber==m+1:
             startingnumber=1
-def findleast():
-    row, col = Table.shape()
+def findleast(Table):
+    row, col = Table.shape
     prev = Table[0, :].tolist()
     for r in range (1, row):
         curr = [float('inf')] * col
         for c in range (1, col):
-            curr=Table[r,c]
-            varible = prev[c]
-            i
+            cost=Table[r,c]
+            variable = prev[c]
+            if c > 0:
+                variable=min(variable,prev[c-1])
+            if c < col - 1:
+                variable=min(variable,prev[c+1])
+            curr[c]=cost+variable
+        prev=curr
+    return min(prev) 
+print(findleast(Table))
